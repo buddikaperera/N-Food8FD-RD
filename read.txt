@@ -15,3 +15,6 @@ import Restaurant from "./Restaurant";
 
 export { Home, Restaurant, OrderDelivery };
 
+
+addd stack navigator and set inital route to home
+then navigation folder set tab to inital route remove home
