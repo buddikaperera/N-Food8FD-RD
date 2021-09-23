@@ -1,0 +1,17 @@
+STEPS
+
+react-native init EP8FDAppRD
+create the assets/constants/screens folder
+add config export para
+react-native.config 
+
+create Screens folder
+
+in screebs index folder
+
+import Home from "./Home";
+import OrderDelivery from "./OrderDelivery";
+import Restaurant from "./Restaurant";
+
+export { Home, Restaurant, OrderDelivery };
+
