@@ -1,10 +1,11 @@
 import React from "react";
 import { View, Image, TouchableOpacity } from "react-native";
-import Svg, { Path } from "react-native-svg";
 import {
      createBottomTabNavigator,
      BottomTabBar,
 } from "@react-navigation/bottom-tabs";
+import Svg, { Path } from "react-native-svg";
+import { isIphoneX } from "react-native-iphone-x-helper";
 
 import { Home } from "../screens";
 
@@ -100,11 +101,16 @@ const Tabs = () => {
                tabBarOptions={{
                     showLabel: false,
                     style: {
+                         position: "absolute",
+                         left: 0,
+                         bottom: 0,
+                         right: 0,
                          borderTopWidth: 0,
                          backgroundColor: "transparent",
                          elevation: 0,
                     },
                }}
+               tabBar={(props) => <CustomTabBar props={props} />}
           >
                <Tab.Screen
                     name="Home"
@@ -115,8 +121,8 @@ const Tabs = () => {
                                    source={icons.cutlery}
                                    resizeMode="contain"
                                    style={{
-                                        width: 28,
-                                        height: 28,
+                                        width: 25,
+                                        height: 25,
                                         tintColor: focused
                                              ? COLORS.primary
                                              : COLORS.secondary,
@@ -138,8 +144,8 @@ const Tabs = () => {
                                    source={icons.search}
                                    resizeMode="contain"
                                    style={{
-                                        width: 28,
-                                        height: 28,
+                                        width: 25,
+                                        height: 25,
                                         tintColor: focused
                                              ? COLORS.primary
                                              : COLORS.secondary,
@@ -161,8 +167,8 @@ const Tabs = () => {
                                    source={icons.like}
                                    resizeMode="contain"
                                    style={{
-                                        width: 28,
-                                        height: 28,
+                                        width: 25,
+                                        height: 25,
                                         tintColor: focused
                                              ? COLORS.primary
                                              : COLORS.secondary,
@@ -184,8 +190,8 @@ const Tabs = () => {
                                    source={icons.user}
                                    resizeMode="contain"
                                    style={{
-                                        width: 28,
-                                        height: 28,
+                                        width: 25,
+                                        height: 25,
                                         tintColor: focused
                                              ? COLORS.primary
                                              : COLORS.secondary,
