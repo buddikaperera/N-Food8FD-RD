@@ -18,3 +18,7 @@ export { Home, Restaurant, OrderDelivery };
 
 addd stack navigator and set inital route to home
 then navigation folder set tab to inital route remove home
+
+
+rounded tab bar 
+npm install react-native-svg
