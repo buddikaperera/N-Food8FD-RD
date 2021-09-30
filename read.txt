@@ -1,11 +1,26 @@
 STEPS
 
 react-native init EP8FDAppRD
+
 create the assets/constants/screens folder
+assets/fonts
+assets/icons
+assets/images
+
+under constants
+icon.js
+images.js
+theme.js
+map.js
+index.js
+
 add config export para
-react-native.config 
+react-native.config  --- use custom fonts in the project
+
 
 create Screens folder
+idetify the screens and add seperate screens with index.js file
+
 
 in screebs index folder
 
@@ -15,10 +30,13 @@ import Restaurant from "./Restaurant";
 
 export { Home, Restaurant, OrderDelivery };
 
+create a folder for navigation 
+create tab.js and in the intial route add the tab
+import to app.js tab.js 
 
 addd stack navigator and set inital route to home
 then navigation folder set tab to inital route remove home
-
+tab.js
 
 rounded tab bar 
 npm install react-native-svg

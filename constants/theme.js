@@ -4,7 +4,7 @@ const { width, height } = Dimensions.get("window");
 export const COLORS = {
     // base colors
     primary: "#FC6D3F", // orange
-    secondary: "#CDCDD2",   // gray
+    secondary: "#CDCDD2", // gray
 
     // colors
     black: "#1E1F20",
@@ -15,7 +15,9 @@ export const COLORS = {
     lightGray3: "#EFEFF1",
     lightGray4: "#F8F8F9",
     transparent: "transparent",
-    darkgray: '#898C95',
+    darkgray: "#898C95",
+    darkYellow2: "#bf9000",
+    lightOrange1: "#f6b26b",
 };
 
 export const SIZES = {
@@ -40,20 +42,44 @@ export const SIZES = {
 
     // app dimensions
     width,
-    height
+    height,
 };
 
 export const FONTS = {
-    largeTitle: { fontFamily: "Roboto-regular", fontSize: SIZES.largeTitle, lineHeight: 55 },
+    largeTitle: {
+        fontFamily: "Roboto-regular",
+        fontSize: SIZES.largeTitle,
+        lineHeight: 55,
+    },
     h1: { fontFamily: "Roboto-Black", fontSize: SIZES.h1, lineHeight: 36 },
     h2: { fontFamily: "Roboto-Bold", fontSize: SIZES.h2, lineHeight: 30 },
     h3: { fontFamily: "Roboto-Bold", fontSize: SIZES.h3, lineHeight: 22 },
     h4: { fontFamily: "Roboto-Bold", fontSize: SIZES.h4, lineHeight: 22 },
-    body1: { fontFamily: "Roboto-Regular", fontSize: SIZES.body1, lineHeight: 36 },
-    body2: { fontFamily: "Roboto-Regular", fontSize: SIZES.body2, lineHeight: 30 },
-    body3: { fontFamily: "Roboto-Regular", fontSize: SIZES.body3, lineHeight: 22 },
-    body4: { fontFamily: "Roboto-Regular", fontSize: SIZES.body4, lineHeight: 22 },
-    body5: { fontFamily: "Roboto-Regular", fontSize: SIZES.body5, lineHeight: 22 },
+    body1: {
+        fontFamily: "Roboto-Regular",
+        fontSize: SIZES.body1,
+        lineHeight: 36,
+    },
+    body2: {
+        fontFamily: "Roboto-Regular",
+        fontSize: SIZES.body2,
+        lineHeight: 30,
+    },
+    body3: {
+        fontFamily: "Roboto-Regular",
+        fontSize: SIZES.body3,
+        lineHeight: 22,
+    },
+    body4: {
+        fontFamily: "Roboto-Regular",
+        fontSize: SIZES.body4,
+        lineHeight: 22,
+    },
+    body5: {
+        fontFamily: "Roboto-Regular",
+        fontSize: SIZES.body5,
+        lineHeight: 22,
+    },
 };
 
 const appTheme = { COLORS, SIZES, FONTS };
