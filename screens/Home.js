@@ -7,13 +7,15 @@ import {
     TouchableOpacity,
     Image,
     FlatList,
+    Dimensions,
 } from "react-native";
 import MobHeader from "../components/MobHeader";
 import initialCurrentLocation from "../constants/data/locationData";
 
 import { icons, images, SIZES, COLORS, FONTS } from "../constants";
+import Restaurant from "../screens/Restaurant";
 
-const Home = () => {
+const Home = ({ navigation }) => {
     // Dummy Datas
 
     // const initialCurrentLocation = {
@@ -404,16 +406,26 @@ const Home = () => {
     //  }
 
     function onSelectCategory(category) {
-        console.log("category", category);
+        /// console.log("category", category);
 
         ///filter restaurant based on category
 
-        let restaurantList = restaurantData.filter((a) =>
-            a.categories.includes(category.id)
+        let restaurantList = restaurantData.filter(
+            (a) => a.categories.includes(category.id)
+            ///a.categories == category.id
         );
-        console.log("restaurantList", restaurantList);
+        /// console.log("restaurantList", restaurantList);
         setSelectedCategory(category);
         setRestaurants(restaurantList);
+        ///console.log("restaurantList", restaurantList);
+    }
+
+    function getCategoryNameById(id) {
+        let category = categories.filter((a) => a.id == id);
+
+        if (category.length > 0) {
+            return category[0].name;
+        } else return "";
     }
 
     function renderMainCategories() {
@@ -443,7 +455,7 @@ const Home = () => {
                             alignItems: "center",
                             justifyContent: "center",
                             backgroundColor:
-                                selectedCategory.id == item.id
+                                selectedCategory?.id === item.id
                                     ? COLORS.white
                                     : COLORS.lightGray4,
                             ...FONTS.body5,
@@ -462,12 +474,11 @@ const Home = () => {
                         <Text
                             style={{
                                 marginTop: SIZES.padding,
+                                ...FONTS.body4,
                                 color:
-                                    selectedCategory.id == item.id
+                                    selectedCategory?.id == item.id
                                         ? COLORS.white
                                         : COLORS.black,
-                                fontWeight: "bold",
-                                ...FONTS.body4,
                             }}
                         >
                             {item.name}
@@ -498,6 +509,126 @@ const Home = () => {
         );
     }
 
+    function renderRestaurantList() {
+        const renderItem = ({ item }) => (
+            <TouchableOpacity
+                style={{ marginBottom: SIZES.padding * 2 }}
+                onPress={() =>
+                    navigation.navigate("Restaurant", {
+                        item,
+                        currentLocation,
+                    })
+                }
+            >
+                {/* Image */}
+                <View
+                    style={{
+                        marginBottom: SIZES.padding,
+                    }}
+                >
+                    <Image
+                        source={item.photo}
+                        resizeMode="cover"
+                        style={{
+                            width: Dimensions.get("window").width - 45,
+                            height: Dimensions.get("window").height / 5 - 12,
+                            borderRadius: SIZES.radius,
+                        }}
+                    />
+                    <View
+                        style={{
+                            position: "absolute",
+                            bottom: 0,
+                            height: 50,
+                            width: SIZES.width * 0.3,
+                            backgroundColor: "rgba(153, 102, 102, 0.8)", ///COLORS.white,
+                            borderTopRightRadius: SIZES.radius,
+                            borderBottomLeftRadius: SIZES.radius,
+                            alignItems: "center",
+                            justifyContent: "center",
+                            ...styles.shadow,
+                        }}
+                    >
+                        <Text style={{ ...FONTS.h4 }}>{item.duration}</Text>
+                    </View>
+                </View>
+                {/* Restaurant Info section*/}
+                <Text style={{ ...FONTS.body3 }}>{item.name}</Text>
+                {/* Rating*/}
+                <View
+                    style={{
+                        marginTop: SIZES.padding,
+                        flexDirection: "row",
+                        justifyContent: "flex-start",
+                    }}
+                >
+                    <Image
+                        source={icons.star}
+                        style={{
+                            height: 25,
+                            width: 25,
+                            tintColor: COLORS.primary,
+                            marginRight: 10,
+                            paddingVertical: 4,
+                        }}
+                    />
+                    <Text style={{ ...FONTS.body3 }}>{item.rating}</Text>
+                    {/*Categories Label*/}
+                    <View style={{ flexDirection: "row", marginLeft: 10 }}>
+                        {item.categories.map((categoryId) => {
+                            return (
+                                <View
+                                    style={{ flexDirection: "row" }}
+                                    key={categoryId}
+                                >
+                                    <Text style={{ ...FONTS.body3 }}>
+                                        {getCategoryNameById(categoryId)}
+                                    </Text>
+                                    <Text
+                                        style={{
+                                            ...FONTS.h3,
+                                            color: COLORS.darkgray,
+                                        }}
+                                    >
+                                        .
+                                    </Text>
+                                </View>
+                            );
+                        })}
+
+                        {/* Price */}
+                        {[1, 2, 3].map((priceRating) => {
+                            <Text
+                                key={priceRating}
+                                style={{
+                                    ...FONTS.body3,
+                                    color:
+                                        priceRating <= item.priceRating
+                                            ? COLORS.black
+                                            : COLORS.darkgray,
+                                }}
+                            >
+                                $
+                            </Text>;
+                        })}
+                    </View>
+                </View>
+            </TouchableOpacity>
+        );
+
+        return (
+            <FlatList
+                data={restaurants}
+                keyExtractor={(item) => `${item.id}`}
+                renderItem={renderItem}
+                contentContainerStyle={{
+                    paddingHorizontal: SIZES.padding * 2,
+                    paddingBottom: 30,
+                }}
+            />
+        );
+    }
+
     return (
         <SafeAreaView style={styles.container}>
             {/* App Header */}
@@ -507,6 +638,9 @@ const Home = () => {
             />
             {/* Top Categoriea */}
             {renderMainCategories()}
+
+            {/* Render Restaurant list .Vertical flat list  */}
+            {renderRestaurantList()}
         </SafeAreaView>
     );
 };
